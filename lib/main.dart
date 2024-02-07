@@ -280,8 +280,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
       MutationOptions options = MutationOptions(
         document: gql("""
-          mutation UpdateApp(\$appId: ID!, \$name: String!, \$username: String!, \$email: String!) {
-            updateApp(id: \$appId, data: { name: \$name, username: \$username, email: \$email }) {
+          mutation UpdateUserTemporal(\$appId: ID!, \$name: String!, \$username: String!, \$email: String!) {
+            updateUserTemporal(id: \$appId, data: { name: \$name, username: \$username, email: \$email }) {
               data {
                 attributes {
                   name
@@ -393,8 +393,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                   MutationOptions options = MutationOptions(
                     document: gql('''
-                      mutation DeleteApp(\$id: ID!) {
-                        deleteApp(id: \$id) {
+                      mutation DeleteUserTemporal(\$id: ID!) {
+                        deleteUserTemporal(id: \$id) {
                           data {
                             attributes {
                               name
