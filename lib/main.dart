@@ -15,7 +15,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: '/',
+        initialRoute: '/users',
         routes: {
           '/': (context) => const RegisterScreen(),
           '/users': (context) => const UsersScreen(),
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
 }
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({super.key});
 
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
@@ -79,8 +79,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
       MutationOptions options = MutationOptions(
         document: gql("""
-          mutation CreateApp(\$name: String!, \$username: String!, \$email: String!) {
-            createApp(data: { name: \$name, username: \$username, email: \$email }) {
+          mutation CreateUserTemporal(\$name: String!, \$username: String!, \$email: String!) {
+            createUserTemporal(data: { name: \$name, username: \$username, email: \$email }) {
               data {
                 attributes {
                   name
@@ -128,7 +128,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(
@@ -142,7 +142,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextFormField(
                 controller: _usernameController,
                 decoration: const InputDecoration(
@@ -155,7 +155,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: _submitForm,
                 child: const Text('Register'),
@@ -169,7 +169,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 }
 
 class UsersScreen extends StatelessWidget {
-  const UsersScreen({Key? key}) : super(key: key);
+  const UsersScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -180,7 +180,7 @@ class UsersScreen extends StatelessWidget {
         options: QueryOptions(
           document: gql("""
             query {
-              apps {
+              userTemporals {
                 data {
                   id
                   attributes {
@@ -208,7 +208,7 @@ class UsersScreen extends StatelessWidget {
             );
           }
 
-          final posts = result1.data!['apps']['data'];
+          final posts = result1.data!['userTemporals']['data'];
 
           return ListView.builder(
             itemCount: posts.length,
@@ -217,7 +217,7 @@ class UsersScreen extends StatelessWidget {
               final name = post['attributes']['name'];
 
               return ListTile(
-                leading: Icon(Icons.person),
+                leading: const Icon(Icons.person),
                 title: Text(post['attributes']['name']),
                 subtitle: Text(post['attributes']['email']),
                 onTap: () {
@@ -242,7 +242,7 @@ class UsersScreen extends StatelessWidget {
 }
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({Key? key}) : super(key: key);
+  const EditProfileScreen({super.key});
 
   @override
   _EditProfileScreenState createState() => _EditProfileScreenState();
@@ -336,7 +336,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextFormField(
                 controller: _emailController..text = email,
                 decoration: const InputDecoration(
@@ -350,7 +350,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextFormField(
                 controller: _usernameController..text = username,
                 decoration: const InputDecoration(
@@ -363,7 +363,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextFormField(
                 controller: _useridController..text = userID,
                 decoration: const InputDecoration(
@@ -378,12 +378,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: _submitForm,
                 child: const Text('Save Changes'),
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () {
                   // Perform delete operation here
@@ -414,10 +414,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                   client.value.mutate(options);
                 },
-                child: const Text('Delete User'),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
+                  backgroundColor: Colors.red,
                 ),
+                child: const Text('Delete User'),
               ),
             ],
           ),
