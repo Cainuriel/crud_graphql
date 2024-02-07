@@ -174,25 +174,33 @@ class UsersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+        onPressed: () {
+                  Navigator.pushNamed(context, '/');
+                },
+        tooltip: 'Register',
+        child: const Icon(Icons.app_registration),
+        
+      ),
       appBar: AppBar(
         title: const Text('Users'),
       ),
       body: Query(
         options: QueryOptions(
           document: gql("""
-            query {
-              userTemporals {
-                data {
-                  id
-                  attributes {
-                    name
-                    username
-                    email
-                  }
-                }
-              }
-            }
-            """),
+                        query {
+                          userTemporals {
+                            data {
+                              id
+                              attributes {
+                                name
+                                username
+                                email
+                              }
+                            }
+                          }
+                        }
+                        """),
         ),
         builder: (result1, {fetchMore, refetch}) {
           if (result1.hasException) {
@@ -430,5 +438,5 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
 
     //  onPressed: () {
-    //               Navigator.pushNamed(context, '/users');
+    //               Navigator.pushNamed(context, '/');
     //             },
