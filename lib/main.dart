@@ -205,7 +205,7 @@ class UsersScreen extends StatelessWidget {
         builder: (result1, {fetchMore, refetch}) {
           if (result1.hasException) {
             // Query encountered an error
-            // print('Query Error: ${result1.exception.toString()}');
+            print('Query Error: ${result1.exception.toString()}');
             return const Center(
               child: Text('An error occurred'),
             );
