@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
     return GraphQLProvider(
       client: client,
       child: MaterialApp(
+        
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
@@ -66,9 +67,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
       String username = _usernameController.text;
 
       // Perform desired operations with the form data
-      print('Name: $name');
-      print('Email: $email');
-      print('Username: $username');
+      // print('Name: $name');
+      // print('Email: $email');
+      // print('Username: $username');
 
       // Mutation variables
       final Map<String, dynamic> variables = {
@@ -94,7 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         variables: variables,
         onCompleted: (dynamic resultData) {
           // Mutation was completed successfully
-          print('Mutation Result: $resultData');
+          // print('Mutation Result: $resultData');
           // Redirect to the profile screen after successful registration
           Navigator.pushNamed(context, '/users');
         },
@@ -196,7 +197,7 @@ class UsersScreen extends StatelessWidget {
         builder: (result1, {fetchMore, refetch}) {
           if (result1.hasException) {
             // Query encountered an error
-            print('Query Error: ${result1.exception.toString()}');
+            // print('Query Error: ${result1.exception.toString()}');
             return const Center(
               child: Text('An error occurred'),
             );
@@ -295,7 +296,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         variables: variables,
         onCompleted: (dynamic resultData) {
           // Mutation was completed successfully
-          print('Mutation Result: $resultData');
+          // print('Mutation Result: $resultData');
           // Redirect to the profile screen after successful update
           Navigator.pushReplacementNamed(context, '/users');
         },
@@ -406,7 +407,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     variables: variables,
                     onCompleted: (dynamic resultData) {
                       // Mutation was completed successfully
-                      print('Mutation Result: $resultData');
+                      // print('Mutation Result: $resultData');
                       // Redirect to the profile screen after successful deletion
                       Navigator.pushReplacementNamed(context, '/users');
                     },
@@ -426,3 +427,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 }
+
+
+    //  onPressed: () {
+    //               Navigator.pushNamed(context, '/users');
+    //             },
